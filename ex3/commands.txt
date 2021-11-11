@@ -1,0 +1,12 @@
+Exercise 3:
+
+  $ kubectl apply -f manifests/deployment.yml
+
+  $ kubectl logs -f log-output-dep-8454f5fc6b-xwzjj
+  > log-output@1.0.0 start
+  > node index.js
+
+  2021-11-10T15:41:10.233Z 0mxUvjdMCxvvUTCjuKqdiaasHPA1zTGf
+  2021-11-10T15:41:15.241Z 0mxUvjdMCxvvUTCjuKqdiaasHPA1zTGf
+  2021-11-10T15:41:20.244Z 0mxUvjdMCxvvUTCjuKqdiaasHPA1zTGf
+  2021-11-10T15:41:25.249Z 0mxUvjdMCxvvUTCjuKqdiaasHPA1zTGf

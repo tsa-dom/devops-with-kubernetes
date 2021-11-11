@@ -1,0 +1,22 @@
+Exercise 1:
+
+  $ docker build . -t dwkex1
+
+  $ docker tag dwkex1 tsadom/dwkex1
+
+  $ docker push tsadom/dwkex1
+
+  $ kubectl create deployment dwkex1 --image=tsadom/dwkex1
+
+  $ kubectl get deployments
+  NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+  dwkex1              1/1     1            1           2m11s
+
+  $ kubectl logs -f dwkex1-7c7ff5f-v8r64
+  > log-output@1.0.0 start
+  > node index.js
+
+  2021-11-10T15:37:33.846Z 9cV32WiJuhnAsQaqQPqGERQxu9CQ6XkU
+  2021-11-10T15:37:38.854Z 9cV32WiJuhnAsQaqQPqGERQxu9CQ6XkU
+  2021-11-10T15:37:43.854Z 9cV32WiJuhnAsQaqQPqGERQxu9CQ6XkU
+  2021-11-10T15:37:48.860Z 9cV32WiJuhnAsQaqQPqGERQxu9CQ6XkU

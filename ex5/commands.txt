@@ -1,0 +1,7 @@
+$ docker build . -t tsadom/dwkex:e5
+
+$ docker push tsadom/dwkex:e5
+
+$ kubectl apply -f manifests/deployment.yaml
+
+$ kubectl port-forward todo-project-dep-59d96784b-lcnxf 5000:8080

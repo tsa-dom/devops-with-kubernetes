@@ -1,0 +1,10 @@
+Exercise 4:
+
+  $ kubectl apply -f manifests/deployment.yaml
+
+  $ kubectl logs -f todo-project-dep-75854c67df-hg8g4
+
+  > todo-app@1.0.0 start
+  > node index.js
+
+  Server started in port 8080

@@ -1,0 +1,20 @@
+Exercise 2:
+
+  $ docker build . -t dwkex2
+
+  $ docker tag dwkex2 tsadom/dwkex2
+
+  $ docker push tsadom/dwkex2
+
+  $ kubectl create deployment dwkex2 --image=tsadom/dwkex2
+
+  $ kubectl get deployments
+  NAME                READY   UP-TO-DATE   AVAILABLE   AGE
+  dwkex2              1/1     1            1           62s
+
+  $ kubectl logs -f dwkex2-bb887fbb-x7lfk
+
+  > todo-app@1.0.0 start
+  > node index.js
+
+  Server started in port 8080
