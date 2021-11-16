@@ -14,10 +14,11 @@ spec:
     spec:
       volumes:
         - name: shared-image
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: todo-project
-          image: tsadom/dwkex:12.1
+          image: tsadom/dwkex:12.11
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/files
