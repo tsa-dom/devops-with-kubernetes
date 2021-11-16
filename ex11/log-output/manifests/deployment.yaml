@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: log-output
+          image: tsadom/dwkex:11.l1
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/app/files

@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  log-output:
+    build:
+      context: ./log-output
+      dockerfile: dev.Dockerfile
+    container_name: log-output
+    ports:
+      - 8080:8080
+    volumes:
+      - ./log-output:/usr/app
+
+  pingpong:
+    build:
+      context: ./pingpong
+      dockerfile: dev.Dockerfile
+    container_name: pingpong
+    ports:
+      - 5000:5000
+    volumes:
+      - ./pingpong:/usr/app
