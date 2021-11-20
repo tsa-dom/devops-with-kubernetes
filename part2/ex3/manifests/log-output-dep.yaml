@@ -1,17 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-frontend-dep
+  namespace: log-pingpong
+  name: log-output-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: todo-frontend
+      app: log-output
   template:
     metadata:
       labels:
-        app: todo-frontend
+        app: log-output
     spec:
       containers:
-        - name: todo-frontend
-          image: tsadom/dwkex:v2.2.frontend.1
+        - name: log-output
+          image: tsadom/dwkex:14.l4

@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: project
   name: todo-frontend-dep
 spec:
   replicas: 1
@@ -14,4 +15,4 @@ spec:
     spec:
       containers:
         - name: todo-frontend
-          image: tsadom/dwkex:v2.2.frontend.1
+          image: tsadom/dwkex:v2.4.frontend.1

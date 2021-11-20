@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: project
   name: todo-backend-dep
 spec:
   replicas: 1
@@ -18,7 +19,7 @@ spec:
             claimName: image-claim
       containers:
         - name: todo-backend
-          image: tsadom/dwkex:v2.2.backend.1
+          image: tsadom/dwkex:v2.4.backend.1
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/files
