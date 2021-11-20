@@ -2,3 +2,5 @@ node_modules
 build
 experiment
 files
+.env
+secret.yaml
