@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: todo-backend-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
+      containers:
+        - name: todo-backend
+          image: tsadom/dwkex:v2.9.backend.2
+          volumeMounts:
+          - name: shared-image
+            mountPath: /usr/app/files
+          env:
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: config-file
+                  key: PG_HOST
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-file
+                  key: PG_DATABASE
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: config-file
+                  key: PG_PORT
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: PG_USER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: PG_PASSWORD
