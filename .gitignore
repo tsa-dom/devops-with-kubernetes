@@ -4,3 +4,4 @@ experiment
 files
 secret.yaml
 key.txt
+.env
