@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: dailytodo
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dailytodo
+            image: tsadom/dwkex:v2.10.cron.4
+            env:
+              - name: PGHOST
+                valueFrom:
+                  configMapKeyRef:
+                    name: config-file
+                    key: PG_HOST
+              - name: PGDATABASE
+                valueFrom:
+                  configMapKeyRef:
+                    name: config-file
+                    key: PG_DATABASE
+              - name: PGPORT
+                valueFrom:
+                  configMapKeyRef:
+                    name: config-file
+                    key: PG_PORT
+              - name: PGUSER
+                valueFrom:
+                  secretKeyRef:
+                    name: secrets
+                    key: PG_USER
+              - name: PGPASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: secrets
+                    key: PG_PASSWORD
+          
+          restartPolicy: Never
