@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- project/manifests/secret.yaml
+- project/manifests/configmap.yaml
+- project/manifests/db/statefulset.yaml
+- project/manifests/db/service.yaml
+- project/manifests/frontend/deployment.yaml
+- project/manifests/frontend/service.yaml
+- project/manifests/backend/deployment.yaml
+- project/manifests/backend/service.yaml
+- project/manifests/cron/job.yaml
+- project/manifests/ingress.yaml
+images:
+- name: tsadom/backend
+  newName: dwk-backend
+- name: tsadom/frontend
+  newName: dwk-frontend
+- name: tsadom/cron
+  newName: dwk-cron

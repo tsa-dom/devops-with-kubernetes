@@ -57,7 +57,6 @@ jobs:
     - name: Set up Kustomize
       uses: imranismail/setup-kustomize@v1
     - name: Deploy
-      working-directory: ./Project
       run: |-
         kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
