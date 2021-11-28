@@ -1,7 +1,7 @@
 name: Relase application
 
 on:
-	push:
+  push:
 	
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -12,54 +12,56 @@ env:
   CRON: dwk-cron
 	
 jobs:
-	build-publish-deploy:
-		name: Build, Publish and Deploy
-		runs-on: ubuntu-latest
-		
-		steps:
-		- name: Checkout
-			uses: actions/checkout@v2
-		- name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GKE_PROJECT }}
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        export_default_credentials: true
-    - run: gcloud --quiet auth configure-docker
-    - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-		- name: Build frontend
-			working-directory: ./Project/frontend
-      run: |-
-        docker build \
-          --tag "gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-          .
-    - name: Build backend
-			working-directory: ./Project/backend
-      run: |-
-        docker build \
-          --tag "gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-          .
-    - name: Build cron
-			working-directory: ./Project/cron
-      run: |-
-        docker build \
-          --tag "gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
-          .
-    - name: Publish
-      run: |-
-        docker push "gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
-      run: |-
-        docker push "gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
-      run: |-
-        docker push "gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
-    - name: Set up Kustomize
-      uses: imranismail/setup-kustomize@v1
-    - name: Deploy
-    	working-directory: ./Project
-      run: |-
-        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
-        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
-        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
-        kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment $IMAGE
-        kubectl get services -o wide
+  build-publish-deploy:
+  name: Build, Publish and Deploy
+  runs-on: ubuntu-latest
+
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+  - name: Set up Cloud SDK
+    uses: google-github-actions/setup-gcloud@master
+    with:
+      project_id: ${{ secrets.GKE_PROJECT }}
+      service_account_key: ${{ secrets.GKE_SA_KEY }}
+      export_default_credentials: true
+  - run: gcloud --quiet auth configure-docker
+  - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+  - name: Build frontend
+    working-directory: ./Project/frontend
+    run: |-
+      docker build \
+      --tag "gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
+      .
+  - name: Build backend
+    working-directory: ./Project/backend
+    run: |-
+      docker build \
+      --tag "gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
+      .
+  - name: Build cron
+    working-directory: ./Project/cron
+    run: |-
+      docker build \
+      --tag "gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" \
+      .
+  - name: Publish frontend
+    run: |-
+      docker push "gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+  - name: Publish backend
+    run: |-
+      docker push "gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+  - name: Publish cron
+    run: |-
+      docker push "gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
+  - name: Set up Kustomize
+    uses: imranismail/setup-kustomize@v1
+  - name: Deploy
+    working-directory: ./Project
+    run: |-
+      kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+      kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+      kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+      kustomize build . | kubectl apply -f -
+      kubectl rollout status deployment $IMAGE
+      kubectl get services -o wide
