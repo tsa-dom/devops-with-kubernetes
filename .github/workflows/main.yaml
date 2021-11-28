@@ -58,6 +58,9 @@ jobs:
       uses: imranismail/setup-kustomize@v1
     - name: Deploy
       run: |-
+        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
+        kustomize edit set image gcr.io/PROJECT_ID/IMAGE=gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize build . | kubectl apply -f -
         kubectl rollout status deployment $IMAGE
         kubectl get services -o wide
