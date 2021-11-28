@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: log-pingpong
+  name: log-output-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      containers:
+        - name: log-output
+          image: tsadom/dwkex:v3.2.log-output.13
+          envFrom:
+            - configMapRef:
+                name: config-file
+
+          volumeMounts:
+            - name: config
+              mountPath: /config/conf
+
+      volumes:
+        - name: config
+          configMap:
+            name: config-file

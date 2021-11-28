@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: log-pingpong
+  name: postgres-svc
+  labels:
+    app: postgres
+spec:
+  clusterIP: None
+  ports:
+  - name: web
+    protocol: TCP
+    port: 5432
+  selector:
+    app: postgresapp
