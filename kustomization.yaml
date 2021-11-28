@@ -1,16 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- project/manifests/secret.yaml
-- project/manifests/configmap.yaml
-- project/manifests/db/statefulset.yaml
-- project/manifests/db/service.yaml
-- project/manifests/frontend/deployment.yaml
-- project/manifests/frontend/service.yaml
-- project/manifests/backend/deployment.yaml
-- project/manifests/backend/service.yaml
-- project/manifests/cron/job.yaml
-- project/manifests/ingress.yaml
+- Project/manifests/secret.yaml
+- Project/manifests/configmap.yaml
+- Project/manifests/db/statefulset.yaml
+- Project/manifests/db/service.yaml
+- Project/manifests/frontend/deployment.yaml
+- Project/manifests/frontend/service.yaml
+- Project/manifests/backend/deployment.yaml
+- Project/manifests/backend/service.yaml
+- Project/manifests/cron/job.yaml
+- Project/manifests/ingress.yaml
 images:
 - name: tsadom/backend
   newName: dwk-backend
