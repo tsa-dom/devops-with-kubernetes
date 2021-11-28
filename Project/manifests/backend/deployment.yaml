@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   namespace: project
   name: todo-backend-dep
 spec:
+  serviceName: todo-backend-svc
   replicas: 1
   selector:
     matchLabels:
@@ -13,16 +14,21 @@ spec:
       labels:
         app: todo-backend
     spec:
-      volumes:
-        - name: shared-image
-          persistentVolumeClaim:
-            claimName: image-claim
       containers:
         - name: todo-backend
-          image: tsadom/dwkex:v2.10.backend.4
+          image: tsadom/backend
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/files
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          ports:
+            - containerPort: 8080
           env:
             - name: PGHOST
               valueFrom:
@@ -49,3 +55,12 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: PG_PASSWORD
+
+  volumeClaimTemplates:
+    - metadata:
+        name: shared-image
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi

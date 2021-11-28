@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
         - name: todo-frontend
-          image: tsadom/dwkex:v2.10.frontend.4
+          image: tsadom/frontend
