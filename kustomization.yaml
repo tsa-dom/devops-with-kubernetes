@@ -11,9 +11,9 @@ resources:
 - Project/manifests/cron/job.yaml
 - Project/manifests/ingress.yaml
 images:
-- name: tsadom/backend
+- name: PROJECT/BACKEND
   newName: dwk-backend
-- name: tsadom/frontend
+- name: PROJECT/FRONTEND
   newName: dwk-frontend
-- name: tsadom/cron
+- name: PROJECT/CRON
   newName: dwk-cron
