@@ -63,6 +63,5 @@ jobs:
         kustomize edit set image gcr.io/PROJECT_ID/CRON=gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize build . | kubectl apply -f -
         kubectl rollout status deployment $FRONTEND
-        kubectl rollout status deployment $BACKEND
-        kubectl rollout status deployment $CRON
+        kubectl rollout status statefulset $BACKEND
         kubectl get services -o wide

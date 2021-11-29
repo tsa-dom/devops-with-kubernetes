@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: project
-  name: todo-frontend-dep
+  name: dwk-frontend
 spec:
   replicas: 1
   selector:
