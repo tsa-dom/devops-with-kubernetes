@@ -12,8 +12,8 @@ resources:
 - Project/manifests/ingress.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: tsadom/dwk-backend
+  newName: gcr.io/PROJECT_ID/BACKEND
 - name: PROJECT/FRONTEND
-  newName: tsadom/dwk-frontend
+  newName: gcr.io/PROJECT_ID/FRONTEND
 - name: PROJECT/CRON
-  newName: tsadom/dwk-cron
+  newName: gcr.io/PROJECT_ID/CRON
