@@ -8,7 +8,7 @@ const BACKEND_URL = window.location.href
 const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [todos, setTodos] = useState([])
-  
+
   useEffect(() => {
     const fetch = async () => {
       const res = await axios.get(`${BACKEND_URL}api/todos`)
@@ -33,6 +33,7 @@ const App = () => {
 
   return (
     <>
+      <div>This is test</div>
       <img alt="Wonderful" src={`${BACKEND_URL}api/image`} style={{ width: 500, height: 500}} />
       <div>
         <input value={inputValue} onChange={handleChange} maxLength={140} style={{ marginRight: 5 }} />
