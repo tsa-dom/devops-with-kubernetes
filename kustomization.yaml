@@ -12,8 +12,8 @@ resources:
 - Project/manifests/ingress.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: dwk-backend
+  newName: tsadom/dwk-backend
 - name: PROJECT/FRONTEND
-  newName: dwk-frontend
+  newName: tsadom/dwk-frontend
 - name: PROJECT/CRON
-  newName: dwk-cron
+  newName: tsadom/dwk-cron
