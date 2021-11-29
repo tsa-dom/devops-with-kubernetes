@@ -58,10 +58,13 @@ jobs:
       uses: imranismail/setup-kustomize@v1
     - name: Deploy
       run: |-
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
         kustomize edit set image gcr.io/PROJECT_ID/FRONTEND=gcr.io/$PROJECT_ID/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize edit set image gcr.io/PROJECT_ID/BACKEND=gcr.io/$PROJECT_ID/$BACKEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize edit set image gcr.io/PROJECT_ID/CRON=gcr.io/$PROJECT_ID/$CRON:${GITHUB_REF#refs/heads/}-$GITHUB_SHA
         kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment $FRONTEND -n project
+        kubectl rollout status deployment $FRONTEND
         kubectl rollout status statefulset $BACKEND -n project
         kubectl get services -o wide
