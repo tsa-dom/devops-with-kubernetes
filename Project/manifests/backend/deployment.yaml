@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: tsadom/backend
+          image: PROJECT/BACKEND
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/files

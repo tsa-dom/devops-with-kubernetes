@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: dailytodo
-            image: tsadom/cron
+            image: PROJECT/CRON
             env:
               - name: PGHOST
                 valueFrom:
