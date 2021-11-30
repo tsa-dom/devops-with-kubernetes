@@ -15,6 +15,21 @@ spec:
         app: todo-backend
     spec:
       containers:
+        - name: cloud-sql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.17
+          command:
+            - "/cloud_sql_proxy"
+            - "-instances=dwk-gke-333411:europe-north1:postgres=tcp:5432"
+            - "-credential_file=/secrets/service_account.json"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            requests:
+              memory: "500Mi"
+          volumeMounts:
+            - name: psql-secret
+              mountPath: /secrets/
+              readOnly: true
         - name: todo-backend
           image: PROJECT/BACKEND
           volumeMounts:
@@ -22,7 +37,7 @@ spec:
             mountPath: /usr/app/files
           livenessProbe:
             httpGet:
-              path: /healthz
+              path: /
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 30
@@ -55,6 +70,10 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: PG_PASSWORD
+      volumes:
+      - name: psql-secret
+        secret:
+          secretName: psql-sa-key
 
   volumeClaimTemplates:
     - metadata:

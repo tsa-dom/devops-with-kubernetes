@@ -12,9 +12,9 @@ resources:
 - manifests/cron/job.yaml
 - manifests/ingress.yaml
 images:
-- name: tsadom/backend
-  newName: dwk-backend
-- name: tsadom/frontend
-  newName: dwk-frontend
-- name: tsadom/cron
-  newName: dwk-cron
+- name: PROJECT/BACKEND
+  newName: tsadom/dwkex:v3.3.backend.6
+- name: PROJECT/FRONTEND
+  newName: tsadom/dwkex:v3.3.frontend.6
+- name: PROJECT/CRON
+  newName: tsadom/dwkex:v3.3.cron.6

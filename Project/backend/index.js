@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { getFileName, fetchImage } = require('./helpers')
 const http = require('http')
 const path = require('path')
@@ -41,18 +40,6 @@ app.post('/api/todos', async (req, res) => {
     console.log('Successfully added a new todo:', addedTodo.todo)
     res.send({ todo: addedTodo })
   }
-})
-
-app.get('/api/healthz', async (req, res) => {
-  res.sendStatus(200)
-})
-
-app.get('/healthz', async (req, res) => {
-  res.sendStatus(200)
-})
-
-app.get('/api', async (req, res) => {
-  res.sendStatus(200)
 })
 
 app.get('/', async (req,res) => {

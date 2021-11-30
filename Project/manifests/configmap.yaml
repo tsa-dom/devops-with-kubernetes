@@ -4,6 +4,6 @@ metadata:
   namespace: project
   name: config-file
 data:
-  PG_HOST: postgres-svc
-  PG_DATABASE: postgres
+  PG_HOST: localhost
+  PG_DATABASE: todo-db
   PG_PORT: "5432"
