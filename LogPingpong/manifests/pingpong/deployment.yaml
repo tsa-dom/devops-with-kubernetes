@@ -16,6 +16,13 @@ spec:
       containers:
         - name: pingpong
           image: tsadom/dwkex:v3.2.pingpong.13
+          resources:
+            requests:
+              cpu: "5m"
+              memory: "100Mi"
+            limits:
+              cpu: "50m"
+              memory: "100Mi"
           livenessProbe:
             httpGet:
               path: /

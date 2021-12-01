@@ -8,6 +8,7 @@ resources:
 - Project/manifests/frontend/service.yaml
 - Project/manifests/backend/deployment.yaml
 - Project/manifests/backend/service.yaml
+- Project/manifests/backend/horizontalpodautoscaler.yaml
 - Project/manifests/cron/job.yaml
 - Project/manifests/ingress.yaml
 images:

@@ -16,6 +16,13 @@ spec:
       containers:
         - name: log-output
           image: tsadom/dwkex:v3.2.log-output.13
+          resources:
+            requests:
+              cpu: "5m"
+              memory: "100Mi"
+            limits:
+              cpu: "50m"
+              memory: "100Mi"
           envFrom:
             - configMapRef:
                 name: config-file

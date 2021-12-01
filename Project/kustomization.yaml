@@ -10,6 +10,7 @@ resources:
 - manifests/frontend/service.yaml
 - manifests/backend/deployment.yaml
 - manifests/backend/service.yaml
+- manifests/backend/horizontalpodautoscaler.yaml
 - manifests/cron/job.yaml
 - manifests/ingress.yaml
 images:

@@ -32,6 +32,13 @@ spec:
               readOnly: true
         - name: todo-backend
           image: PROJECT/BACKEND
+          resources:
+            requests:
+              cpu: "28m"
+              memory: "100Mi"
+            limits:
+              cpu: "28m"
+              memory: "100Mi"
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/files

@@ -7,6 +7,8 @@ resources:
 - manifests/db/service.yaml
 - manifests/log-output/deployment.yaml
 - manifests/log-output/service.yaml
+- manifests/log-output/horizontalpodautoscaler.yaml
 - manifests/pingpong/deployment.yaml
 - manifests/pingpong/service.yaml
+- manifests/pingpong/horizontalpodautoscaler.yaml
 - manifests/ingress.yaml
