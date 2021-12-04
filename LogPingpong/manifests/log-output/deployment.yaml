@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: tsadom/dwkex:v3.2.log-output.13
+          image: tsadom/dwkex:log-output.3
           resources:
             requests:
               cpu: "5m"
@@ -30,6 +30,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config/conf
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /healthz
+               port: 8080
+          ports:
+            - containerPort: 8080
 
       volumes:
         - name: config

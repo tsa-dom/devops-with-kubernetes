@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: tsadom/dwkex:v3.2.pingpong.13
+          image: tsadom/dwkex:pingpong.3
           resources:
             requests:
               cpu: "5m"
@@ -23,6 +23,12 @@ spec:
             limits:
               cpu: "50m"
               memory: "100Mi"
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /healthz
+               port: 5000
           livenessProbe:
             httpGet:
               path: /

@@ -20,6 +20,12 @@ app.get('/pingpong', async (req, res) => {
   res.send(`Pongs: ${counter}`)
 })
 
+app.get('/healthz', async (req, res) => {
+  const { rows } = await client.query(`SELECT NOW();`)
+  if (rows.length === 1) res.sendStatus(200)
+  else res.sendStatus(500)
+})
+
 server.listen(PORT, HOST, () => {
   console.log(`Server started in port ${PORT}`)
 })

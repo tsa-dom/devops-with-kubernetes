@@ -32,6 +32,15 @@ app.get('/', async (req, res) => {
   `)
 })
 
+app.get('/healthz', async (req, res) => {
+  const response = await axios.get("http://pingpong-svc/healthz")
+  if (response.status === 200) {
+    res.sendStatus(200)
+  } else {
+    res.sendStatus(500)
+  }
+})
+
 const PORT = 8080
 const HOST = '0.0.0.0'
 
