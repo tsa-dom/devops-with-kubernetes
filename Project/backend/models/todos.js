@@ -6,8 +6,16 @@ const todos = {
     return res.rows
   },
   addTodo: async (todo) => {
-    const res = await pool.query('INSERT INTO Todos (todo) VALUES ($1) RETURNING *;', [todo])
+    const res = await pool.query('INSERT INTO Todos (todo, done) VALUES ($1, FALSE) RETURNING *;', [todo])
     return res.rows[0]
+  },
+  setTodoAsDone: async (id) => {
+    try {
+      await pool.query('UPDATE Todos SET done=TRUE WHERE id=$1;', [id])
+      return true
+    } catch (err) {
+      return false
+    }
   }
 }
 

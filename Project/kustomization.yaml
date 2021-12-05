@@ -16,8 +16,8 @@ resources:
 - manifests/analysistemplate.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: tsadom/dwkex:backend.8
+  newName: tsadom/dwkex:backend.11
 - name: PROJECT/FRONTEND
-  newName: tsadom/dwkex:frontend.8
+  newName: tsadom/dwkex:frontend.11
 - name: PROJECT/CRON
-  newName: tsadom/dwkex:cron.8
+  newName: tsadom/dwkex:cron.11
