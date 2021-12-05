@@ -1,9 +1,12 @@
+require('dotenv').config()
 const { getFileName, fetchImage } = require('./helpers')
 const http = require('http')
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
+
 const { todos: todoModel } = require('./models/todos.js')
+const { healthz } = require('./models/healthz')
 
 const dir = path.join('/', 'usr', 'app', 'files')
 const PORT = 8080
@@ -42,8 +45,14 @@ app.post('/api/todos', async (req, res) => {
   }
 })
 
-app.get('/', async (req,res) => {
+app.get('/', async (req, res) => {
   res.sendStatus(200)
+})
+
+app.get('/healthz', async (req, res) => {
+  const dbState = await healthz.checkHealthy()
+  if (dbState && dbState.length === 1) res.sendStatus(200)
+  else res.sendStatus(500)
 })
 
 app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')))

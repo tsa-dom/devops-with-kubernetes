@@ -16,3 +16,11 @@ spec:
       containers:
         - name: todo-frontend
           image: PROJECT/FRONTEND
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /healthz
+               port: 80
+          ports:
+            - containerPort: 80

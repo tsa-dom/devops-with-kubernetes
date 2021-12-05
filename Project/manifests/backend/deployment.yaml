@@ -1,10 +1,9 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   namespace: project
   name: dwk-backend
 spec:
-  serviceName: todo-backend-svc
   replicas: 1
   selector:
     matchLabels:
@@ -40,11 +39,17 @@ spec:
               cpu: "28m"
               memory: "100Mi"
           volumeMounts:
-          - name: shared-image
-            mountPath: /usr/app/files
+            - name: shared-image
+              mountPath: /usr/app/files
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+               path: /healthz
+               port: 8080
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthz
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 30
@@ -81,12 +86,6 @@ spec:
       - name: psql-secret
         secret:
           secretName: psql-sa-key
-
-  volumeClaimTemplates:
-    - metadata:
-        name: shared-image
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 100Mi
+      - name: shared-image
+        persistentVolumeClaim:
+          claimName: image-claim

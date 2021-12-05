@@ -15,8 +15,8 @@ resources:
 - manifests/ingress.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: tsadom/dwkex:v3.3.backend.6
+  newName: tsadom/dwkex:backend.8er
 - name: PROJECT/FRONTEND
-  newName: tsadom/dwkex:v3.3.frontend.6
+  newName: tsadom/dwkex:frontend.8
 - name: PROJECT/CRON
-  newName: tsadom/dwkex:v3.3.cron.6
+  newName: tsadom/dwkex:cron.8
