@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: cpu-usage
+spec:
+  metrics:
+  - name: cpu-usage
+    successCondition: result < 7
+    provider:
+      prometheus:
+        address: http://kube-prometheus-stack-1638-prometheus.prometheus.svc.cluster.local:9090
+        query: |
+          scalar(sum(container_cpu_usage_seconds_total{namespace="project"}))

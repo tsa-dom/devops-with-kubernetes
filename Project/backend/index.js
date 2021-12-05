@@ -45,6 +45,10 @@ app.post('/api/todos', async (req, res) => {
   }
 })
 
+app.get('/api', async (req, res) => {
+  res.send('Version v1')
+})
+
 app.get('/', async (req, res) => {
   res.sendStatus(200)
 })

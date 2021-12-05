@@ -3,7 +3,7 @@ const { pool } = require('../db.js')
 const healthz = {
   checkHealthy: async () => {
     try {
-      const res = await pool.query('SELECT err NOW()')
+      const res = await pool.query('SELECT NOW()')
       return res.rows
     } catch (error) {
       console.error(error)

@@ -8,14 +8,15 @@ resources:
 - manifests/db/service.yaml
 - manifests/frontend/deployment.yaml
 - manifests/frontend/service.yaml
-- manifests/backend/deployment.yaml
+- manifests/backend/rollout.yaml
 - manifests/backend/service.yaml
 - manifests/backend/horizontalpodautoscaler.yaml
 - manifests/cron/job.yaml
 - manifests/ingress.yaml
+- manifests/analysistemplate.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: tsadom/dwkex:backend.8er
+  newName: tsadom/dwkex:backend.8
 - name: PROJECT/FRONTEND
   newName: tsadom/dwkex:frontend.8
 - name: PROJECT/CRON
