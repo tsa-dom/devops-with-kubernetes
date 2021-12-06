@@ -3,6 +3,7 @@ const http = require('http')
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
+const { publishTodoState } = require('./nats')
 
 const { todos: todoModel } = require('./models/todos.js')
 const { healthz } = require('./models/healthz')
@@ -40,14 +41,16 @@ app.post('/api/todos', async (req, res) => {
   } else {
     const addedTodo = await todoModel.addTodo(todo)
     console.log('Successfully added a new todo:', addedTodo.todo)
+    publishTodoState(JSON.stringify(addedTodo))
     res.send({ todo: addedTodo })
   }
 })
 
 app.put('/api/todos/:id', async (req, res) => {
   const id = req.params.id
-  const result = await todoModel.setTodoAsDone(id)
-  res.send(result)
+  const todo = await todoModel.setTodoAsDone(id)
+  publishTodoState(JSON.stringify(todo))
+  res.send(todo)
 })
 
 app.get('/api', async (req, res) => {

@@ -69,6 +69,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: NATS_URL
+              value: nats://my-nats:4222
             - name: PGHOST
               valueFrom:
                 configMapKeyRef:

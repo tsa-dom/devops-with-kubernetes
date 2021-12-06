@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: dwk-broadcaster
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: todo-broadcaster
+  template:
+    metadata:
+      labels:
+        app: todo-broadcaster
+    spec:
+      containers:
+        - name: todo-broadcaster
+          image: PROJECT/BROADCASTER
+          env:
+            - name: NATS_URL
+              value: nats://my-nats:4222
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: DISCORD_BOT_TOKEN

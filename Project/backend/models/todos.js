@@ -10,12 +10,8 @@ const todos = {
     return res.rows[0]
   },
   setTodoAsDone: async (id) => {
-    try {
-      await pool.query('UPDATE Todos SET done=TRUE WHERE id=$1;', [id])
-      return true
-    } catch (err) {
-      return false
-    }
+    const res = await pool.query('UPDATE Todos SET done=TRUE WHERE id=$1 RETURNING *', [id])
+    return res.rows[0]
   }
 }
 

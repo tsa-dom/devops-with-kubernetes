@@ -14,3 +14,8 @@ cd ../cron
 
 docker build . -t tsadom/dwkex:cron.$1
 docker push tsadom/dwkex:cron.$1
+
+cd ../broadcaster
+
+docker build . -t tsadom/dwkex:broadcaster.$1
+docker push tsadom/dwkex:broadcaster.$1
