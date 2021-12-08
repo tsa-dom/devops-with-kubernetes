@@ -17,14 +17,14 @@ resources:
 - persistent/persistentvolume.yaml
 images:
 - name: PROJECT/BACKEND
-  newName: tsa-dom/dwkex
-  newTag: backend.6766a5049746623efc4ee30c5fa37d5321c2d19d
+  newName: tsadom/dwkex
+  newTag: backend.bfaa7a1fecf07f040e5c0e3fadeab299596bd1a4
 - name: PROJECT/BROADCASTER
-  newName: tsa-dom/dwkex
-  newTag: broadcaster.6766a5049746623efc4ee30c5fa37d5321c2d19d
+  newName: tsadom/dwkex
+  newTag: broadcaster.bfaa7a1fecf07f040e5c0e3fadeab299596bd1a4
 - name: PROJECT/CRON
-  newName: tsa-dom/dwkex
-  newTag: cron.6766a5049746623efc4ee30c5fa37d5321c2d19d
+  newName: tsadom/dwkex
+  newTag: cron.bfaa7a1fecf07f040e5c0e3fadeab299596bd1a4
 - name: PROJECT/FRONTEND
-  newName: tsa-dom/dwkex
-  newTag: frontend.6766a5049746623efc4ee30c5fa37d5321c2d19d
+  newName: tsadom/dwkex
+  newTag: frontend.bfaa7a1fecf07f040e5c0e3fadeab299596bd1a4
