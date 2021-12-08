@@ -44,6 +44,7 @@ const MainPage = () => {
 
   return (
     <>
+      <div>Hello world</div>
       <img alt="Wonderful" src={`${BACKEND_URL}api/image`} style={{ width: 500, height: 500}} />
       <div>
         <input value={inputValue} onChange={handleChange} maxLength={140} style={{ marginRight: 5 }} />
