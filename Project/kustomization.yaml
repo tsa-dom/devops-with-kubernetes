@@ -18,13 +18,13 @@ resources:
 images:
 - name: PROJECT/BACKEND
   newName: tsa-dom/dwkex
-  newTag: backend.a3c2c4e786204f9e85dab8acae37d6f517381898
+  newTag: backend.6766a5049746623efc4ee30c5fa37d5321c2d19d
 - name: PROJECT/BROADCASTER
   newName: tsa-dom/dwkex
-  newTag: broadcaster.a3c2c4e786204f9e85dab8acae37d6f517381898
+  newTag: broadcaster.6766a5049746623efc4ee30c5fa37d5321c2d19d
 - name: PROJECT/CRON
   newName: tsa-dom/dwkex
-  newTag: cron.a3c2c4e786204f9e85dab8acae37d6f517381898
+  newTag: cron.6766a5049746623efc4ee30c5fa37d5321c2d19d
 - name: PROJECT/FRONTEND
   newName: tsa-dom/dwkex
-  newTag: frontend.a3c2c4e786204f9e85dab8acae37d6f517381898
+  newTag: frontend.6766a5049746623efc4ee30c5fa37d5321c2d19d
