@@ -5,7 +5,7 @@ metadata:
 spec:
   metrics:
   - name: cpu-usage
-    successCondition: result < 7
+    successCondition: result < 20
     provider:
       prometheus:
         address: http://kube-prometheus-stack-1638-prometheus.prometheus.svc.cluster.local:9090
