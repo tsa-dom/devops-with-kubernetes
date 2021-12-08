@@ -63,10 +63,10 @@ jobs:
     - name: Update yamls
       working-directory: Project
       run: |
-        kustomize edit set image PROJECT/FRONTEND=tsa-dom/dwkex:frontend.${{ github.sha }}
-        kustomize edit set image PROJECT/BACKEND=tsa-dom/dwkex:backend.${{ github.sha }}
-        kustomize edit set image PROJECT/CRON=tsa-dom/dwkex:cron.${{ github.sha }}
-        kustomize edit set image PROJECT/BROADCASTER=tsa-dom/dwkex:broadcaster.${{ github.sha }}
+        kustomize edit set image PROJECT/FRONTEND=tsadom/dwkex:frontend.${{ github.sha }}
+        kustomize edit set image PROJECT/BACKEND=tsadom/dwkex:backend.${{ github.sha }}
+        kustomize edit set image PROJECT/CRON=tsadom/dwkex:cron.${{ github.sha }}
+        kustomize edit set image PROJECT/BROADCASTER=tsadom/dwkex:broadcaster.${{ github.sha }}
 
     - uses: EndBug/add-and-commit@v7
       with:
