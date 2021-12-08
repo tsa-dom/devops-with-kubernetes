@@ -13,6 +13,8 @@ resources:
 - manifests/broadcaster/deployment.yaml
 - manifests/ingress.yaml
 - manifests/analysistemplate.yaml
+- persistent/persistentvolumeclaim.yaml
+- persistent/persistentvolume.yaml
 images:
 - name: PROJECT/BACKEND
   newName: tsadom/dwkex:backend.13
@@ -22,3 +24,9 @@ images:
   newName: tsadom/dwkex:cron.13
 - name: PROJECT/BROADCASTER
   newName: tsadom/dwkex:broadcaster.13
+...
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- https://raw.githubusercontent.com/argoproj/argo-rollouts/master/manifests/install.yaml
+namespace: argo-rollouts
