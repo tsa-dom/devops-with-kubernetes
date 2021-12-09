@@ -54,7 +54,7 @@ app.put('/api/todos/:id', async (req, res) => {
 })
 
 app.get('/api', async (req, res) => {
-  res.send('Version v1')
+  res.send('This is updated properly :)')
 })
 
 app.get('/', async (req, res) => {
