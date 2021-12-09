@@ -4,7 +4,7 @@ metadata:
   name: monitoring-nats
   namespace: prometheus
   labels:
-    release: kube-prometheus-stack-1639005750
+    release: my-prometheus
 spec:
   selector:
     matchLabels:

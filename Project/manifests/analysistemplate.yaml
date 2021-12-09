@@ -8,6 +8,6 @@ spec:
     successCondition: result < 30
     provider:
       prometheus:
-        address: http://kube-prometheus-stack-1639-prometheus.prometheus.svc.cluster.local:9090
+        address: http://my-prometheus-kube-prometh-prometheus.prometheus.svc.cluster.local:9090
         query: |
           scalar(sum(container_cpu_usage_seconds_total{namespace="project"}))

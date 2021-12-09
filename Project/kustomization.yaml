@@ -13,6 +13,7 @@ resources:
 - manifests/broadcaster/deployment.yaml
 - manifests/ingress.yaml
 - manifests/analysistemplate.yaml
+- manifests/servicemonitor.yaml
 - persistent/persistentvolumeclaim.yaml
 - persistent/persistentvolume.yaml
 images:
