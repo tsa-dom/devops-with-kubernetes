@@ -20,13 +20,13 @@ resources:
 images:
 - name: PROJECT/BACKEND
   newName: tsadom/dwkex
-  newTag: backend.b6a576a775ba9f5d41feaa83646dd3132f2df253
+  newTag: backend.09ed6e532a7ad4602352a8de0889ba085b6d16cd
 - name: PROJECT/BROADCASTER
   newName: tsadom/dwkex
-  newTag: broadcaster.b6a576a775ba9f5d41feaa83646dd3132f2df253
+  newTag: broadcaster.09ed6e532a7ad4602352a8de0889ba085b6d16cd
 - name: PROJECT/CRON
   newName: tsadom/dwkex
-  newTag: cron.b6a576a775ba9f5d41feaa83646dd3132f2df253
+  newTag: cron.09ed6e532a7ad4602352a8de0889ba085b6d16cd
 - name: PROJECT/FRONTEND
   newName: tsadom/dwkex
-  newTag: frontend.b6a576a775ba9f5d41feaa83646dd3132f2df253
+  newTag: frontend.09ed6e532a7ad4602352a8de0889ba085b6d16cd
