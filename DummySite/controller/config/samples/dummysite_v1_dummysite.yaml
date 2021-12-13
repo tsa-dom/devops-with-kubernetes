@@ -1,0 +1,7 @@
+apiVersion: dummysite.stable.dwk/v1
+kind: DummySite
+metadata:
+  name: dummysite-sample
+spec:
+  website_url: 'https://example.com'
+  # TODO(user): Add fields here

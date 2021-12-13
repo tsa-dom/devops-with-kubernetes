@@ -1,0 +1,7 @@
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: dummy
+spec:
+  website_url: https://example.com
+  image: tsadom/controller:v1.0.2
