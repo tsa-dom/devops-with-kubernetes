@@ -2,6 +2,17 @@
 
 This is course work for University of Helsinki [DevOps With Kubernetes](https://devopswithkubernetes.com/) course.
 
+[GitOps repository](https://github.com/tsa-dom/kube-cluster-dwk)
+
+You need to specify following commands to use GitOps
+* k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+* docker exec k3d-k3s-default-agent-0 mkdir -p /tmp/kube
+* export GITHUB_TOKEN=\<my-github-token\>
+* flux bootstrap github --owner=tsa-dom --repository=kube-cluster-dwk --personal --private=false
+* cat age.agekey | kubectl -n flux-system create secret generic sops-age --from-file=age.agekey=/dev/stdin (in the directory where age.agekey is located)
+  
+Now everything should work and the app should be running on port 8081 :)
+
 # Pros and cons comparison for DBaaS and DIY
 
 ## DBaaS
