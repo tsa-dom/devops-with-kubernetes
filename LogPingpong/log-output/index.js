@@ -18,7 +18,7 @@ repeat()
 const app = express()
 
 const getPongs = async () => {
-  const res = await axios.get("http://pingpong-svc/pingpong")
+  const res = await axios.get("http://pingpong.log-pingpong.svc.cluster.local/pingpong")
   return res.data
 }
 
@@ -33,7 +33,7 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/healthz', async (req, res) => {
-  const response = await axios.get("http://pingpong-svc/healthz")
+  const response = await axios.get("http://pingpong.log-pingpong.svc.cluster.local/healthz")
   if (response.status === 200) {
     res.sendStatus(200)
   } else {

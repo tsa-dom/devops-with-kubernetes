@@ -1,43 +1,15 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: serving.knative.dev/v1
+kind: Service
 metadata:
+  name: pingpong
   namespace: log-pingpong
-  name: pingpong-dep
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: pingpong
   template:
     metadata:
-      labels:
-        app: pingpong
+      name: pingpong-dwk
     spec:
       containers:
-        - name: pingpong
-          image: tsadom/dwkex:pingpong.5
-          resources:
-            requests:
-              cpu: "5m"
-              memory: "100Mi"
-            limits:
-              cpu: "50m"
-              memory: "100Mi"
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            httpGet:
-               path: /healthz
-               port: 8080
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-          ports:
-            - containerPort: 8080
+        - image: tsadom/dwkex:pingpong.6
           env:
             - name: PG_HOST
               valueFrom:

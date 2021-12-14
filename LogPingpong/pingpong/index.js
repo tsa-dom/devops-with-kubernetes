@@ -3,7 +3,7 @@ const http = require('http')
 const config = require('./utils/config')
 const { Client } = require('pg')
 
-const PORT = 5000
+const PORT = 8080
 const HOST = '0.0.0.0'
 
 const app = express()
