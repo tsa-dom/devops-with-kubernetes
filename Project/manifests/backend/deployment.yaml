@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: project
   name: dwk-backend
+  namespace: project
 spec:
   replicas: 1
   selector:
@@ -10,78 +10,80 @@ spec:
       app: todo-backend
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: todo-backend
     spec:
       containers:
-        - name: cloud-sql-proxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.17
-          command:
-            - "/cloud_sql_proxy"
-            - "-instances=dwk-gke-333411:europe-north1:postgres=tcp:5432"
-            - "-credential_file=/secrets/service_account.json"
-          securityContext:
-            runAsNonRoot: true
-          resources:
-            requests:
-              memory: "500Mi"
-          volumeMounts:
-            - name: psql-secret
-              mountPath: /secrets/
-              readOnly: true
-        - name: todo-backend
-          image: PROJECT/BACKEND
-          resources:
-            requests:
-              cpu: "28m"
-              memory: "100Mi"
-            limits:
-              cpu: "28m"
-              memory: "100Mi"
-          volumeMounts:
-            - name: shared-image
-              mountPath: /usr/app/files
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            httpGet:
-               path: /healthz
-               port: 8080
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-              scheme: HTTP
-            initialDelaySeconds: 30
-            timeoutSeconds: 5
-          ports:
-            - containerPort: 8080
-          env:
-            - name: PGHOST
-              valueFrom:
-                configMapKeyRef:
-                  name: config-file
-                  key: PG_HOST
-            - name: PGDATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: config-file
-                  key: PG_DATABASE
-            - name: PGPORT
-              valueFrom:
-                configMapKeyRef:
-                  name: config-file
-                  key: PG_PORT
-            - name: PGUSER
-              valueFrom:
-                secretKeyRef:
-                  name: secrets
-                  key: PG_USER
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: secrets
-                  key: PG_PASSWORD
+      - command:
+        - /cloud_sql_proxy
+        - -instances=dwk-gke-333411:europe-north1:postgres=tcp:5432
+        - -credential_file=/secrets/service_account.json
+        image: gcr.io/cloudsql-docker/gce-proxy:1.17
+        name: cloud-sql-proxy
+        resources:
+          requests:
+            memory: 500Mi
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /secrets/
+          name: psql-secret
+          readOnly: true
+      - env:
+        - name: PGHOST
+          valueFrom:
+            configMapKeyRef:
+              key: PG_HOST
+              name: config-file
+        - name: PGDATABASE
+          valueFrom:
+            configMapKeyRef:
+              key: PG_DATABASE
+              name: config-file
+        - name: PGPORT
+          valueFrom:
+            configMapKeyRef:
+              key: PG_PORT
+              name: config-file
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              key: PG_USER
+              name: secrets
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: PG_PASSWORD
+              name: secrets
+        image: PROJECT/BACKEND
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        name: todo-backend
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 28m
+            memory: 100Mi
+          requests:
+            cpu: 28m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /usr/app/files
+          name: shared-image
       volumes:
       - name: psql-secret
         secret:

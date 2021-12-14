@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: project
   name: dwk-broadcaster
+  namespace: project
 spec:
   replicas: 6
   selector:
@@ -10,17 +10,19 @@ spec:
       app: todo-broadcaster
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: todo-broadcaster
     spec:
       containers:
-        - name: todo-broadcaster
-          image: PROJECT/BROADCASTER
-          env:
-            - name: NATS_URL
-              value: nats://my-nats:4222
-            - name: API_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: secrets
-                  key: DISCORD_BOT_TOKEN
+      - env:
+        - name: NATS_URL
+          value: nats://my-nats:4222
+        - name: API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: DISCORD_BOT_TOKEN
+              name: secrets
+        image: PROJECT/BROADCASTER
+        name: todo-broadcaster

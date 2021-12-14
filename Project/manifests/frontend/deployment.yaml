@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: project
   name: dwk-frontend
+  namespace: project
 spec:
   replicas: 1
   selector:
@@ -10,17 +10,19 @@ spec:
       app: todo-frontend
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: todo-frontend
     spec:
       containers:
-        - name: todo-frontend
-          image: PROJECT/FRONTEND
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            httpGet:
-               path: /healthz
-               port: 80
-          ports:
-            - containerPort: 80
+      - image: PROJECT/FRONTEND
+        name: todo-frontend
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
