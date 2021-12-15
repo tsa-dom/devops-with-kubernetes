@@ -40,3 +40,13 @@ Now everything should work and the app should be running on port 8081 :)
 # My database decision 
 
 I wanted to implement Google Cloud SQL because I did earlier an implement for PersistentVolumeClaims and wanted some extra challenge.
+
+# Rancher is better than OpenShift
+
+* It takes less time to setup Rancher than OpenShift. To setup OpenShift clusters may take even two weeks. Rancher couple of days.
+* If you choose OpenShift its then harder to move back to normal kubernetes. Moving away from Rancher is easier.
+* Rnacher is better if you need to manage multiple clusters.
+* Updating is faster with Rancher.
+* Rancher follows industry standards and OpenShift has its own standards.
+* Rancher has better support for package managers like Helm.
+* Rancher is more stable platform than OpenShift.
