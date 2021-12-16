@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -13,7 +14,8 @@ func main() {
 }
 
 func GetDummy(w http.ResponseWriter, r *http.Request) {
-	response, err := http.Get("http://example.com")
+	websiteUrl := os.Getenv("WEBSITE_URL")
+	response, err := http.Get(websiteUrl)
 	if err != nil {
 		log.Panic(err)
 	}

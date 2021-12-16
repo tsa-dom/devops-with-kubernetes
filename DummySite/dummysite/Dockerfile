@@ -5,12 +5,13 @@ WORKDIR /workspace
 COPY . .
 
 RUN go mod download
+RUN go build -o server main.go
 
 FROM alpine
 
 WORKDIR /go/bin
 
-COPY --from=build /workspace /go/bin/server
+COPY --from=build /workspace/server /go/bin/server
 
 EXPOSE 8080
 

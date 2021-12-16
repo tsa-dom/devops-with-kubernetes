@@ -15,6 +15,6 @@ spec:
       serviceAccountName: dummysite-controller-account
       containers:
         - name: dummysite-controller
-          image: tsadom/dummysite:v1.0.1
+          image: tsadom/dummysite-controller-sha-311007
           ports:
             - containerPort: 8080
